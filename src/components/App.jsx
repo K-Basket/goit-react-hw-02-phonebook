@@ -17,7 +17,7 @@ export class App extends Component {
   };
 
   formSubmitHandler = data => {
-    console.log('data', data); // --temp
+    // console.log('data', data);
 
     if (
       this.state.contacts.some(
@@ -28,7 +28,7 @@ export class App extends Component {
       ) ||
       data.name === ''
     ) {
-      console.log(`${data.name} is already in contacts`);
+      // console.log(`${data.name} is already in contacts`);
       Notiflix.Notify.failure(`${data.name} is already in contacts`);
       return;
     }
@@ -55,9 +55,16 @@ export class App extends Component {
       el.name.toLowerCase().includes(normalizedFilter)
     );
   };
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(el => el.id !== contactId),
+    }));
+  };
+
   render() {
-    console.log(this.state.contacts);
-    console.log(this.state.filter);
+    // console.log(this.state.contacts);
+    // console.log(this.state.filter);
 
     return (
       <>
@@ -66,8 +73,10 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChangeFilter={this.changeFilter} />
-        <ContactList contacts={this.getFiltered()} />
-        {/* <ContactList contacts={this.state.contacts} /> */}
+        <ContactList
+          contacts={this.getFiltered()}
+          onDeleteContact={this.deleteContact}
+        />
       </>
     );
   }
