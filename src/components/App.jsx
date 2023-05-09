@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Notiflix from 'notiflix';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
@@ -13,10 +14,16 @@ export class App extends Component {
     console.log('data', data); // --temp
 
     if (
-      this.state.contacts.some(el => el.name === data.name) ||
-      this.state.contacts.some(el => el.number === data.number)
+      this.state.contacts.some(
+        el => el.name.toLowerCase() === data.name.toLowerCase()
+      ) ||
+      this.state.contacts.some(
+        el => el.number.toLowerCase() === data.number.toLowerCase()
+      ) ||
+      data.name === ''
     ) {
-      console.log('Этот контакт есть в базе');
+      console.log(`${data.name} is already in contacts`);
+      Notiflix.Notify.failure(`${data.name} is already in contacts`);
       return;
     }
 

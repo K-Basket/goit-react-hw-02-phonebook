@@ -49,6 +49,14 @@ export class ContactForm extends Component {
         </label>
 
         <button type="submit">Add contact</button>
+
+        {/* {this.state.name === '' || this.state.number === '' ? (
+          <button type="submit" disabled>
+            Add contact
+          </button>
+        ) : (
+          <button type="submit">Add contact</button>
+        )} */}
       </form>
     );
   }
