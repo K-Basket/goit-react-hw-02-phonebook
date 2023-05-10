@@ -19,14 +19,14 @@ export class App extends Component {
   formSubmitHandler = data => {
     // console.log('data', data);
 
+    const { name, number } = data;
+    const { contacts } = this.state;
+    const normalizedName = name.toLowerCase();
+    const normalizedNumber = number.toLowerCase();
+
     if (
-      this.state.contacts.some(
-        el => el.name.toLowerCase() === data.name.toLowerCase()
-      ) ||
-      this.state.contacts.some(
-        el => el.number.toLowerCase() === data.number.toLowerCase()
-      ) ||
-      data.name === ''
+      contacts.some(el => el.name.toLowerCase() === normalizedName) ||
+      contacts.some(el => el.number.toLowerCase() === normalizedNumber)
     ) {
       // console.log(`${data.name} is already in contacts`);
       Notiflix.Notify.failure(`${data.name} is already in contacts`);
